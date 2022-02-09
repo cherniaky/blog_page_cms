@@ -7,22 +7,6 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const { store } = useContext(Context);
 
-    async function Custom(username, password) {
-        const req = await fetch(
-            "http://localhost:4000/api/login",
-            // "http://localhost:3000/api/login",
-            {
-                method: "POST",
-                body: JSON.stringify({ username, password }),
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-        const myJson = await req.json();
-        console.log(myJson);
-    }
 
     return (
         <div>
