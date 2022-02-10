@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
+import './styles/normalize.css'
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Store from "./store/store";

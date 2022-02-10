@@ -1,7 +1,8 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { API_URL } from "../http";
+import $api, { API_URL } from "../http";
 import AuthService from "../services/AuthService";
+import Cookies from "js-cookie";
 
 export default class Store {
     user = {};
@@ -26,8 +27,15 @@ export default class Store {
 
     async login(username, password) {
         try {
-            const response = await AuthService.login(username, password);
-           // console.log(response);
+            let response;
+            if (username == "guest" && password == "guest") {
+                response = await AuthService.loginAsGuest();
+            } else {
+                response = await AuthService.login(username, password);
+            } // console.log(response);
+            Cookies.set("refreshToken", response.data.refreshToken, {
+                expires: 15,
+            });
             localStorage.setItem("token", response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -39,7 +47,8 @@ export default class Store {
     async logout() {
         try {
             const response = await AuthService.logout();
-           // console.log(response);
+            // console.log(response);
+            Cookies.remove("refreshToken");
             localStorage.removeItem("token");
             this.setAuth(false);
             this.setUser({});
@@ -52,8 +61,12 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
+            //const response = await $api.get('refresh')
             const response = await axios.get(`${API_URL}/refresh`, {
                 withCredentials: true,
+            });
+            Cookies.set("refreshToken", response.data.refreshToken, {
+                expires: 15,
             });
             //console.log(response.data)
             localStorage.setItem("token", response.data.accessToken);

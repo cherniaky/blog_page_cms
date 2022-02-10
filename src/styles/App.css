@@ -1,0 +1,32 @@
+* {
+    font-family: sans-serif;
+}
+.App {
+    height: 100%;
+    text-align: center;
+}
+ul{
+    list-style: none;
+}
+.container{
+  padding: 20px;
+    display: flex;
+    align-items: center;
+   flex-direction: column;
+    height: calc(100vh - 80px);
+    background-image: linear-gradient(132.6deg, #3780ce 23.3%, #25d8d3 84.7%);
+    background-size: cover;
+    background-position: 50%;
+    overflow: overlay;
+}
+input{
+    border: none;
+    outline: none;
+    padding:5px ;
+    padding-left: 15px;
+    border-bottom: 1px solid rgb(160, 160, 160);
+    margin: 15px 0;
+}
+input:focus{
+     border-bottom: 3px solid #4593e6 ;
+}
