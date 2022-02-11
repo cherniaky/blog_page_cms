@@ -1,10 +1,29 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "..";
 import "../styles/navbar.css";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../icons/logo.svg";
+import { observer } from "mobx-react-lite";
 
 const NavBar = () => {
     const { store } = useContext(Context);
+    const [currentPage, setCurrentPage] = useState('');
+
+    useEffect(() => {
+        
+        if (window.location.href == "http://localhost:3000/#/posts") {
+            setCurrentPage('posts')
+        }
+        if (window.location.href == "http://localhost:3000/#/posts/create") {
+            setCurrentPage("posts/create");
+        }
+        
+      return () => {
+        
+      }
+    }, [])
+    
+
     return (
         <div className="nav-bar">
             <div className="nav-bar-container">
@@ -16,10 +35,32 @@ const NavBar = () => {
                     <ul className="nav-buttons">
                         <li>
                             {" "}
-                            <button onClick={() => 0}>Posts</button>
+                            <Link to="/posts">
+                                <button
+                                    className={
+                                        currentPage == "posts"
+                                            ? "current-but"
+                                            : ""
+                                    }
+                                    onClick={() => setCurrentPage("posts")}
+                                >
+                                    Posts
+                                </button>
+                            </Link>
                         </li>
                         <li>
-                            <button onClick={() => 0}>New post</button>
+                            <Link to="/posts/create">
+                                <button
+                                    className={
+                                        currentPage == "posts/create"
+                                            ? "current-but"
+                                            : ""
+                                    }
+                                    onClick={() => setCurrentPage("posts/create")}
+                                >
+                                    New post
+                                </button>
+                            </Link>
                         </li>
                         <li>
                             <button
@@ -38,4 +79,4 @@ const NavBar = () => {
     );
 };
 
-export default NavBar;
+export default observer(NavBar);

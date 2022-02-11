@@ -4,6 +4,7 @@ import './styles/normalize.css'
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Store from "./store/store";
+import { HashRouter } from "react-router-dom";
 
 const store = new Store();
 
@@ -13,11 +14,15 @@ export const Context = createContext({
 
 ReactDOM.render(
     <React.StrictMode>
-        <Context.Provider value={{
-          store
-        }}>
-            <App />
-        </Context.Provider>
+        <HashRouter basename="/">
+            <Context.Provider
+                value={{
+                    store,
+                }}
+            >
+                <App />
+            </Context.Provider>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById("root")
 );

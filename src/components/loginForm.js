@@ -1,9 +1,13 @@
 import { observer } from "mobx-react-lite";
 import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "..";
-import '../styles/loginForm.css'
+import "../styles/loginForm.css";
+
 
 const LoginForm = () => {
+    let navigate = useNavigate();   
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { store } = useContext(Context);
@@ -30,15 +34,28 @@ const LoginForm = () => {
                     name="password"
                     placeholder="Password"
                 />
-                <button onClick={() => store.login(username, password)}>
-                    Login
-                </button>
+                <Link to="/posts">
+                    <button
+                        type="submit"
+                        onClick={() => store.login(username, password)}
+                    >
+                        Login
+                    </button>
+                </Link>
             </div>
             <div className="login-bottom">
                 Wanna look around?{" "}
-                <button type="submit" className="guest" onClick={() => store.login("guest", "guest")}>
-                    Just visiting
-                </button>
+                <Link to="/posts">
+                    <button
+                        type="submit"
+                        className="guest"
+                        onClick={() => {
+                            store.login("guest", "guest");
+                        }}
+                    >
+                        Just visiting
+                    </button>
+                </Link>
             </div>
         </div>
     );
