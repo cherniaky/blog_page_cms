@@ -5,6 +5,7 @@ import { Context } from ".";
 import LoginForm from "./components/loginForm";
 import NavBar from "./components/NavBar";
 import Post from "./components/Post";
+import { Posts } from "./components/Posts";
 import BlogService from "./services/BlogService";
 import "./styles/App.css";
 
@@ -21,8 +22,6 @@ function App() {
 
         setPosts(postsres.data.posts);
     }, []);
-
-   
 
     if (store.isLoading) {
         return <div className="App">Loading...</div>;
@@ -47,21 +46,7 @@ function App() {
                     <Route
                         exact
                         path="/posts"
-                        element={
-                            posts &&
-                            posts.map((post) => {
-                                return (
-                                    <Post
-                                        key={post._id}
-                                        title={post.title}
-                                        text={post.text}
-                                        date={post.date}
-                                        author={post.author}
-                                        comments={post.comments}
-                                    />
-                                );
-                            })
-                        }
+                        element={<Posts posts={posts} />}
                     ></Route>
                 </Routes>
             </div>
