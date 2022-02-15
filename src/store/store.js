@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import $api, { API_URL } from "../http";
 import AuthService from "../services/AuthService";
 import Cookies from "js-cookie";
+import BlogService from "../services/BlogService";
 
 export default class Store {
     user = {};
@@ -52,6 +53,44 @@ export default class Store {
             localStorage.removeItem("token");
             this.setAuth(false);
             this.setUser({});
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
+    async getPost(postid) {
+        try {
+            const response = await BlogService.getPost(postid);
+            // console.log(response);
+
+            return response.data;
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
+    async updatePost(postid, text, title, author) {
+        try {
+            const response = await BlogService.updatePost(
+                postid,
+                text,
+                title,
+                author
+            );
+             console.log(response);
+
+            return response.data;
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
+    async getPostComments(postid) {
+        try {
+            const response = await BlogService.getPostComments(postid);
+            // console.log(response);
+
+            return response.data;
         } catch (error) {
             // console.log(error);
             return error;

@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Context } from ".";
+import { EditPost } from "./components/EditPost";
 import LoginForm from "./components/loginForm";
 import NavBar from "./components/NavBar";
 import Post from "./components/Post";
@@ -47,6 +48,11 @@ function App() {
                         exact
                         path="/posts"
                         element={<Posts posts={posts} />}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/posts/:postid"
+                        element={<EditPost/>}
                     ></Route>
                 </Routes>
             </div>

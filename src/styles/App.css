@@ -43,10 +43,16 @@ input {
     border: none;
     outline: none;
     padding: 5px;
+   
+}
+.login-container input {
+    border: none;
+    outline: none;
+    padding: 5px;
     padding-left: 15px;
     border-bottom: 1px solid rgb(160, 160, 160);
     margin: 15px 0;
 }
-input:focus {
+.login-container input:focus {
     border-bottom: 3px solid #4593e6;
 }
