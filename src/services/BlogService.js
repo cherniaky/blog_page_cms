@@ -8,6 +8,12 @@ export default class BlogService {
     static getPost(postid) {
         return $api.get(`posts/${postid}`);
     }
+    static createPost(title,text) {
+        return $api.post(`posts`, {
+            title,
+            text
+        });
+    }
     static updatePost(postid, text, title, author) {
         return $api.put(`posts/${postid}`, {
             text,

@@ -110,6 +110,19 @@ export default class Store {
             return error;
         }
     }
+    async createPost(title,text) {
+        try {
+            const response = await BlogService.createPost(title ,text);
+
+           
+            // console.log(response);
+
+            return { ...response.data };
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
     async getPostComments(postid) {
         try {
             const response = await BlogService.getPostComments(postid);

@@ -34,7 +34,7 @@ export const EditPost = ({ posts, setPosts }) => {
 
     if (loading) {
         return (
-            <div>
+            <div className="loading-container">
                 <Oval color="#00BFFF" height={80} width={80} />
             </div>
         );

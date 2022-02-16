@@ -12,6 +12,7 @@ import "./styles/App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
  
 import { Oval } from "react-loader-spinner";
+import { NewPost } from "./components/NewPost";
 
 function App() {
     const { store } = useContext(Context);
@@ -62,6 +63,11 @@ function App() {
                         exact
                         path="/posts/:postid"
                         element={<EditPost posts={posts} setPosts={setPosts}/>}
+                    ></Route>
+                    <Route
+                        exact 
+                        path="/posts/create"
+                        element={<NewPost  setPosts={setPosts}/>}
                     ></Route>
                 </Routes>
             </div>
