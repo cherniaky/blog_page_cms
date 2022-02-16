@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Context } from "..";
+import "../styles/EditForm.css"
 
-export const EditPost = ({}) => {
+export const EditPost = ({ posts, setPosts }) => {
     const { postid } = useParams();
+
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
@@ -38,7 +41,7 @@ export const EditPost = ({}) => {
                     e.preventDefault();
                     store.updatePost(postid, text, title, author);
                 }}
-                className="edit-post-form"
+                className="edit-post-form card"
             >
                 <label htmlFor="title">Title:</label>
                 <input
@@ -57,32 +60,63 @@ export const EditPost = ({}) => {
                     value={text}
                     name="text"
                 ></textarea>
-                <input type="submit" value="Update" />
-                <button
-                    onClick={() => {
-                        "fd";
-                    }}
-                >
-                    {published ? "Unpublish" : "Publish"}
-                </button>
-                <button
-                    onClick={() => {
-                        "fd";
-                    }}
-                >
-                    Delete
-                </button>
+                <div className="edit-buttons card-bottom">
+                    <button
+                        onClick={() => {
+                            store.updatePost(postid, text, title, author);
+                        }}
+                    >
+                        Update
+                    </button>
+                    <button
+                        onClick={() => {
+                            setPublished(!published);
+                            store.togglePublishPost(postid);
+                        }}
+                    >
+                        {published ? "Unpublish" : "Publish"}
+                    </button>
+                    <button
+                        onClick={() => {
+                            store.deletePost(postid);
+                            // console.log(posts);
+                            setPosts(
+                                posts.filter((post) => {
+                                    if (post._id == postid) {
+                                        return 0;
+                                    }
+
+                                    return 1;
+                                })
+                            );
+                            navigate("/posts");
+                        }}
+                        className="delete"
+                    >
+                        Delete
+                    </button>
+                </div>
             </form>
 
             <section className="comment-section">
                 {comments.map((comment) => {
                     return (
-                        <div key={comment._id}>
+                        <div className="card" key={comment._id}>
                             <header>{comment.user}</header>
                             {comment.text}
                             <button
+                                className="delete"
                                 onClick={() => {
-                                    return "fd";
+                                    setComments(
+                                        comments.filter((newComment) => {
+                                            if (newComment._id == comment._id) {
+                                                return 0;
+                                            }
+
+                                            return 1;
+                                        })
+                                    );
+                                    store.deleteComment(postid, comment._id);
                                 }}
                             >
                                 Delete

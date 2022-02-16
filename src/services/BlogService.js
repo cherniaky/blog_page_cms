@@ -15,8 +15,21 @@ export default class BlogService {
             author,
         });
     }
+    static togglePublishPost(postid) {
+        return $api.post(`posts/${postid}`);
+    }
+    static deletePost(postid) {
+        return $api.delete(`posts/${postid}`);
+    }
 
     static getPostComments(postid) {
         return $api.get(`posts/${postid}/comments`);
+    }
+
+    static deleteComment(postid, commentid) {
+        return $api.delete(`posts/${postid}/comments/${commentid}`);
+    }
+    static deleteComments(postid) {
+        return $api.delete(`posts/${postid}/comments`);
     }
 }

@@ -1,27 +1,31 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "..";
 import "../styles/navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../icons/logo.svg";
 import { observer } from "mobx-react-lite";
 
 const NavBar = () => {
     const { store } = useContext(Context);
     const [currentPage, setCurrentPage] = useState('');
+    const sampleLocation = useLocation();
 
     useEffect(() => {
-        
-        if (window.location.href == "http://localhost:3000/#/posts") {
+          //  console.log(sampleLocation);
+        if (sampleLocation.pathname == "/posts") {
             setCurrentPage('posts')
         }
-        if (window.location.href == "http://localhost:3000/#/posts/create") {
+        else if (sampleLocation.pathname == "/posts/create") {
             setCurrentPage("posts/create");
+        } else {
+            setCurrentPage("/");
         }
         
       return () => {
         
       }
-    }, [])
+    }, [sampleLocation])
+    
     
 
     return (

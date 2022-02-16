@@ -77,7 +77,30 @@ export default class Store {
                 title,
                 author
             );
-             console.log(response);
+            //  console.log(response);
+
+            return response.data;
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
+    async togglePublishPost(postid) {
+        try {
+            const response = await BlogService.togglePublishPost(postid);
+            //  console.log(response);
+
+            return response.data;
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
+    async deletePost(postid) {
+        try {
+            const response = await BlogService.deletePost(postid);
+            const deleteCommentRes  = await BlogService.deleteComments(postid)
+           // console.log(response);
 
             return response.data;
         } catch (error) {
@@ -96,7 +119,17 @@ export default class Store {
             return error;
         }
     }
+    async deleteComment(postid ,commentid) {
+        try {
+            const response = await BlogService.deleteComment(postid ,commentid);
+           console.log(response);
 
+            return response.data;
+        } catch (error) {
+            // console.log(error);
+            return error;
+        }
+    }
     async checkAuth() {
         this.setLoading(true);
         try {

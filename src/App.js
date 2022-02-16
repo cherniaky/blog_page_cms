@@ -22,6 +22,7 @@ function App() {
         let postsres = await BlogService.getPosts();
 
         setPosts(postsres.data.posts);
+       
     }, []);
 
     if (store.isLoading) {
@@ -52,7 +53,7 @@ function App() {
                     <Route
                         exact
                         path="/posts/:postid"
-                        element={<EditPost/>}
+                        element={<EditPost posts={posts} setPosts={setPosts}/>}
                     ></Route>
                 </Routes>
             </div>
