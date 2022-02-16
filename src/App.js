@@ -9,6 +9,9 @@ import Post from "./components/Post";
 import { Posts } from "./components/Posts";
 import BlogService from "./services/BlogService";
 import "./styles/App.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+ 
+import { Oval } from "react-loader-spinner";
 
 function App() {
     const { store } = useContext(Context);
@@ -26,7 +29,12 @@ function App() {
     }, []);
 
     if (store.isLoading) {
-        return <div className="App">Loading...</div>;
+        return (
+            <div className="App loading-container">
+                {" "}
+                <Oval color="#00BFFF" height={80} width={80} />
+            </div>
+        );
     }
 
     if (!store.isAuth) {

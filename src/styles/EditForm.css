@@ -1,4 +1,65 @@
+
+.edit-post-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.edit-post-form-container{
+    width: 70%;
+}
+.edit-post-form label{
+      opacity: 0.5;
+    font-size: 36px;
+    margin-left: 20px;
+}
+.edit-post-form button{
+    color: white;
+}
+.edit-post-form textarea{
+    resize: vertical;
+}
+.edit-post-form input{
+    font-size: 30px;
+}
 button.delete:hover {
-    background-color: #c75047;
+    background-color: #c75047 !important;
     color: #fff;
+}
+.title:focus + label.titlel{
+    opacity: 1;
+}
+.edit-form-input {
+  
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    padding: 7px 12px;
+    margin: 10px auto 11px;
+    border-radius: 0;
+    width: 96%;
+    font-size: 16px;
+}
+
+.comment-section header{
+   
+    font-size: 36px;
+    text-align: left;
+}
+.comment-section {
+    margin-top: 30px;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+.form-group label{
+   align-self:flex-start;
+}
+.form-group:focus-within label
+{
+    opacity: 1;
 }

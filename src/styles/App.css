@@ -5,7 +5,7 @@
 
 ::-webkit-scrollbar {
     width: 18px;
-    background-color: #25d8d3;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
@@ -55,4 +55,12 @@ input {
 }
 .login-container input:focus {
     border-bottom: 3px solid #4593e6;
+}
+.loading-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   background-image: linear-gradient(132.6deg, #3780ce 23.3%, #25d8d3 84.7%);
 }

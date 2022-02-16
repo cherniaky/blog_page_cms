@@ -99,10 +99,12 @@ export default class Store {
     async deletePost(postid) {
         try {
             const response = await BlogService.deletePost(postid);
-            const deleteCommentRes  = await BlogService.deleteComments(postid)
-           // console.log(response);
 
-            return response.data;
+            const deleteCommentRes = await BlogService.deleteComments(postid);
+
+            // console.log(response);
+
+            return { ...response.data, ...deleteCommentRes.data };
         } catch (error) {
             // console.log(error);
             return error;
@@ -119,10 +121,10 @@ export default class Store {
             return error;
         }
     }
-    async deleteComment(postid ,commentid) {
+    async deleteComment(postid, commentid) {
         try {
-            const response = await BlogService.deleteComment(postid ,commentid);
-           console.log(response);
+            const response = await BlogService.deleteComment(postid, commentid);
+            console.log(response);
 
             return response.data;
         } catch (error) {

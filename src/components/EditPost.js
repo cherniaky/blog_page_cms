@@ -3,6 +3,8 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Context } from "..";
 import "../styles/EditForm.css"
 
+import { Oval } from "react-loader-spinner";
+
 export const EditPost = ({ posts, setPosts }) => {
     const { postid } = useParams();
 
@@ -31,11 +33,15 @@ export const EditPost = ({ posts, setPosts }) => {
     }, []);
 
     if (loading) {
-        return <>Loading...</>;
+        return (
+            <div>
+                <Oval color="#00BFFF" height={80} width={80} />
+            </div>
+        );
     }
 
     return (
-        <div>
+        <div className="edit-post-form-container">
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -43,23 +49,31 @@ export const EditPost = ({ posts, setPosts }) => {
                 }}
                 className="edit-post-form card"
             >
-                <label htmlFor="title">Title:</label>
-                <input
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                    type="text"
-                    value={title}
-                    name="title"
-                />
-                <label htmlFor="text">Title:</label>
-                <textarea
-                    onChange={(e) => {
-                        setText(e.target.value);
-                    }}
-                    value={text}
-                    name="text"
-                ></textarea>
+                <div className="form-group">
+                    <label className="titlel" htmlFor="title">
+                        Title:
+                    </label>
+                    <input
+                        className="edit-form-input title"
+                        onChange={(e) => {
+                            setTitle(e.target.value);
+                        }}
+                        type="text"
+                        value={title}
+                        name="title"
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="text">Text:</label>
+                    <textarea
+                        className="edit-form-input text"
+                        onChange={(e) => {
+                            setText(e.target.value);
+                        }}
+                        value={text}
+                        name="text"
+                    ></textarea>
+                </div>
                 <div className="edit-buttons card-bottom">
                     <button
                         onClick={() => {
@@ -98,7 +112,8 @@ export const EditPost = ({ posts, setPosts }) => {
                 </div>
             </form>
 
-            <section className="comment-section">
+            <section className="comment-section card">
+                <header>Comments({comments.length})</header>
                 {comments.map((comment) => {
                     return (
                         <div className="card" key={comment._id}>
